@@ -175,7 +175,7 @@ export async function createVite(
 		},
 		ssr: {
 			noExternal: [...ALWAYS_NOEXTERNAL, ...astroPkgsConfig.ssr.noExternal],
-			external: [...(mode === 'dev' ? ONLY_DEV_EXTERNAL : []), ...astroPkgsConfig.ssr.external],
+			external: [...(mode === 'dev' ? ONLY_DEV_EXTERNAL : []), 'astro/container', ...astroPkgsConfig.ssr.external],
 		},
 	};
 
