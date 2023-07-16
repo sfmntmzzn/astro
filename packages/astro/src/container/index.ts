@@ -31,7 +31,7 @@ export class AstroContainer {
 		} = {}
 	) {
 		const { env } = this;
-		const ctx = createRenderContext({ request })
+		const ctx = await createRenderContext({ request, mod: Component, env })
 		const result = createResult({
 			adapterName: env.adapterName,
 			links: ctx.links,
@@ -43,7 +43,6 @@ export class AstroContainer {
 			params,
 			props,
 			pathname: ctx.pathname,
-			propagation: ctx.propagation,
 			resolve: env.resolve,
 			renderers: env.renderers,
 			request: ctx.request,
@@ -51,6 +50,9 @@ export class AstroContainer {
 			scripts: ctx.scripts,
 			ssr: env.ssr,
 			status: ctx.status ?? 200,
+			// propagation: ctx.propagation,
+			clientDirectives: env.clientDirectives,
+			locals: ctx.locals ?? {},
 		});
 		const output = await renderComponentToIterable(
 			result,
